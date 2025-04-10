@@ -1,0 +1,39 @@
+Resources:
+  EC2Instance:
+    Description: An EC2 instance that using a cloudformation template
+    Type: "AWS::EC2::Instance"
+    Properties:
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup # Menggunakan ID security group, bukan nama
+      ImageId: ami-00ae2c3d8c3a99b55 # AMI ID untuk Amazon Linux 2 di region Anda
+      InstanceType: t3.micro
+      SubnetId: subnet-xxxxxxxx # Ganti dengan subnet ID yang valid di VPC Anda
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "Hello, World!" > /var/www/html/index.html
+
+  InstanceSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "Allow SSH and HTTP trafics"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  InstanceId:
+    Description: Instance ID of the newly created EC2 instance
+    Value: !Ref EC2Instance
+  PublicIP:
+    Description: Public IP address of the newly created EC2 instance
+    Value: !GetAtt EC2Instance.PublicIp

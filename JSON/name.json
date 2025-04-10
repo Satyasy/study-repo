@@ -1,0 +1,12 @@
+{
+  "Name": "Revan",
+  "Age": 35,
+  "City": "New York",
+  "Country": "USA",
+  "Contact": {
+    "Email": "revan@example.com",
+    "Phone": "+1 123-456-7890"
+  },
+  "Language Known": ["NodeJS", "Python", "JavaScript", "C"],
+  "Can Be null": null
+}

@@ -1,0 +1,86 @@
+#Examples of YAML files
+name: yaml
+date: 2014-06-12
+
+#Comments can be added using '#'
+#Lists are denoted by '-'
+fruits:
+  - apple
+  - banana
+  - orange
+
+#Dictionaries are denoted by ':'
+person:
+  name: John Doe
+  age: 30
+
+#Arrays of dictionaries can be created using '[]'
+
+#This is an array of dictionaries
+people:
+  - name: Alice
+    age: 25
+  - name: Bob
+    age: 35
+
+#Nested dictionaries can be created using '.'
+address:
+  street: 123 Main St
+  city: New York
+  state: NY
+
+#Arrays of arrays can be created using '[][]'
+#This is an array of arrays
+grades:
+  - [85, 90, 95]
+  - [80, 75, 85]
+  - [95, 90, 88]
+
+  #You can also use '#' to represent a comment within a list or dictionary
+  #This comment will be ignored by the YAML parser
+  #grades:
+  #  - [85, 90, 95] # Good grades
+  #  - [80, 75, 85] # Average grades
+  #  - [95, 90, 88] # Excellent grades
+
+#You can also use '?' and ':' to represent optional or required fields
+#The '?' makes the field optional, while the ':' makes it required
+optional_person:
+  name: John Doe?
+  age: 30
+
+required_person:
+  name: John Doe
+  age: 30
+  # This field is required
+
+#You can also use '|' to represent a block scalar
+#This allows you to include line breaks and indentation in the value
+multiline_text: |
+  This is a multiline text block.
+  It can span multiple lines.
+  Each line will be preserved.
+  The leading and trailing whitespace will be removed.
+  And this line will be indented.
+
+#You can use '>' to represent a single-line scalar
+
+#This is a single-line scalar
+single_line_text: >
+  This is a single-line text.
+  It will be displayed on a single line.
+
+#You can use '&' to represent a reference
+
+#This is a reference to the 'person' dictionary
+person_reference: &person_ref
+  name: John Doe
+  age: 30
+
+#You can use '-' to represent a mapping entry
+
+#This is a mapping entry
+person_mapping:
+  - *person_ref
+  - name: Jane Doe
+    age: 28
